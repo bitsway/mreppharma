@@ -3106,11 +3106,18 @@ function getCartData_keyup(product_id){
 				if(orderProductIdQtyList.length==2){
 					var orderProductId=orderProductIdQtyList[0];
 					var orderProductQty=orderProductIdQtyList[1];
-					
+				//	alert (productOrderStr.indexOf(product_id));
+					//alert (orderProductList[j]);
 					if (orderProductId==pid){
 						product_index=productOrderStr.indexOf(product_id)
 						if (product_index==0){
-							productOrderStr=productOrderStr.replace(orderProductList[j]+'<rd>', "")
+							if(productOrderStr.indexOf('<rd>')>0){
+								productOrderStr=productOrderStr.replace(orderProductList[j]+'<rd>', "")
+							}
+							else{
+								productOrderStr=productOrderStr.replace(orderProductList[j], "")
+							 }
+								//alert (productOrderStr);
 						}
 						if (product_index > 0){
 							productOrderStr=productOrderStr.replace('<rd>'+orderProductList[j], "")
@@ -4490,13 +4497,14 @@ function visitSubmit_doc(){
 					$("#btn_visit_submit").hide();
 					$("#wait_image_visit_submit").show();		
 					//alert (localStorage.productOrderStr);
-
-					// $("#errorChkVSubmit").html(localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+long+'&v_with='+v_with)
+					var marketNameId=localStorage.visit_market_show.split('|');
+					var market_Id=marketNameId[1];					
+					// $("#errorChkVSubmit").html(localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+long+'&v_with='+v_with+'&route='+market_Id)
 					// ajax-------
 					//alert (localStorage.payment_mode);
 					$.ajax({
 						 type: 'POST',
-						 url: localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+long+'&v_with='+v_with,
+						 url: localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+long+'&v_with='+v_with+'&route='+market_Id,
 						 success: function(result) {
 								
 								//alert(result);
