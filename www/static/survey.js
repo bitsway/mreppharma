@@ -128,6 +128,10 @@ function cancelVisitPage(){
 	
 	var url = "#pageHome";
 	$.mobile.navigate(url);
+	
+	location.reload();
+	
+	
 }
 
 //================= Clear authorization
@@ -526,7 +530,7 @@ function check_user() {
 localStorage.report_button='<a data-role="button" onClick="s_order_summary_report();">Sales Call and Order Count</a><a data-role="button" onClick="s_order_detail_report();" >Sales Call and Order Detail</a>'
 														$('#order_report_button').empty();
 														$('#order_report_button').append(localStorage.report_button).trigger('create');
-														//$("#order_report_button").html('nadira');
+														
 															 
 															
 														}
@@ -595,21 +599,16 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 													$("#doctor_sample_list_tbl").html(localStorage.product_tbl_str_doc_sample);
 													//$('#doctor_sample_list_tbl').empty();
 													//$('#doctor_sample_list_tbl').append(localStorage.product_tbl_str_doc_sample).trigger('create');
-													
-													
-													
-													//alert (localStorage.product_tbl_str_doc_sample)
+
 													//------------ Gift Item list								
-													//alert (localStorage.gift_string);
+	
 													
 													
 													if (localStorage.gift_string.length > 5 ){
 													
 														var giftList=localStorage.gift_string.split('<rd>');
 														var giftLength=giftList.length;
-														
-														//alert ('nadira');
-														//var gift_tbl_doc='<table width="100%" border="0"  cellpadding="0" cellspacing="0" style="border-radius:5px;">';
+
 														
 														var gift_tbl_doc='<ul id="gift_combo_id_lv" data-role="listview"  data-filter="true" data-input="#gift_combo_id" data-inset="true" >';
 														for (var j=0; j < giftLength; j++){
@@ -3436,7 +3435,7 @@ function marketRetailerNext_doc() {
 
 		var url = "#page_visit_doc";
 		$.mobile.navigate(url);
-		//location.reload();
+		location.reload();
 							
 			
 	
@@ -3577,6 +3576,39 @@ function getDocCampaignData_keyup(product_id){
 	}
 		
 	}
+function campaign_remove(id){
+	var campaign_show=localStorage.campaign_doc_str;
+	var campaign_showList=campaign_show.split('<rd>');
+	var campaign_showListLength=campaign_showList.length;
+	
+	
+
+	for (var j=0; j < campaign_showListLength; j++){
+
+		if (j==0){
+			campaign_show=campaign_show.replace(id,"");
+		}
+		else{
+			campaign_show=campaign_show.replace("<rd>"+id,"");
+		}
+
+
+	}
+	localStorage.campaign_doc_str=campaign_show;
+	$('#'+id).remove();
+	
+	var camp_combo="#doc_camp"+id
+	$(camp_combo).attr("checked", false);
+	
+	if  (campaign_show_1.indexOf('undefined')==-1 ){
+		var campaign= ($("#doc_campaign").html());
+		localStorage.campaign_show_1=campaign;
+	}
+	
+	//getDocCampaignData();
+}	
+	
+	
 function getDocCampaignData(){	
 	var campaign_show=localStorage.campaign_doc_str;
 
@@ -3624,23 +3656,24 @@ function campaign_as_sample(){
 		//alert (campaign_showList[j]);
 		if (campaign_showList[j].length !=0){
 				if (productSampleStr.indexOf(campaign_showList[j])==-1){
-					productSampleStr=productSampleStr+'<rd>'+campaign_showList[j]+'<fd>1'
-					var pname=$("#doc_camp_name"+campaign_showList[j]).val();
-					sample_show_1=sample_show_1+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr><td >'+pname+'('+campaign_showList[j]+')'+'</td><td width="80px">'+'<input  type="number" id="s_cart_qty'+ campaign_showList[j] +'"  onBlur="sampleCartData_keyup(\''+campaign_showList[j] +'\');" value="1" placeholder="0">'+'</td></tr>'+'</table>'+'</li>'
+					$("#sample_qty"+campaign_showList[j]).val(0);
+					productSampleStr=productSampleStr+'<rd>'+campaign_showList[j]+'<fd>0'
+					//var pname=$("#doc_camp_name"+campaign_showList[j]).val();
+					//sample_show_1=sample_show_1+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr><td >'+pname+'('+campaign_showList[j]+')'+'</td><td width="80px">'+'<input  type="number" id="s_cart_qty'+ campaign_showList[j] +'"  onBlur="sampleCartData_keyup(\''+campaign_showList[j] +'\');" value="0" placeholder="0">'+'</td></tr>'+'</table>'+'</li>'
 					
 				}
 		}
 		
 	}
-
-	//sample_show_1=sample_show_1+'</ul>';
-	localStorage.sample_show_1=sample_show_1;
-	localStorage.productSampleStr=productSampleStr;
 	
+	//sample_show_1=sample_show_1+'</ul>';
+	//localStorage.sample_show_1=sample_show_1;
+	localStorage.productSampleStr=productSampleStr;
+	getDocSampleData();
 	//$("#doc_sample").html("</br>"+localStorage.sample_show_1+"</br>");
 	
-	$('#doc_sample').empty();
-	$('#doc_sample').append("</br>"+localStorage.sample_show_1+"</br>").trigger('create');
+	//$('#doc_sample').empty();
+	//$('#doc_sample').append("</br>"+localStorage.sample_show_1+"</br>").trigger('create');
 	
 				
 		
@@ -3649,33 +3682,7 @@ function campaign_as_sample(){
 }
 	
 	
-function campaign_remove(id){
-	var campaign_show=localStorage.campaign_doc_str;
-	var campaign_showList=campaign_show.split('<rd>');
-	var campaign_showListLength=campaign_showList.length;
-	
-	
 
-	for (var j=0; j < campaign_showListLength; j++){
-
-		if (j==0){
-			campaign_show=campaign_show.replace(id,"");
-		}
-		else{
-			campaign_show=campaign_show.replace("<rd>"+id,"");
-		}
-
-
-	}
-	localStorage.campaign_doc_str=campaign_show;
-	$('#'+id).remove();
-	if  (campaign_show_1.indexOf('undefined')==-1 ){
-		var campaign= ($("#doc_campaign").html());
-		localStorage.campaign_show_1=campaign;
-	}
-	
-	//getDocCampaignData();
-}
 
 function getDoctorGift(){
 	if ((localStorage.gift_tbl_doc==undefined) || (localStorage.gift_tbl_doc=='undefined')){
@@ -4182,11 +4189,11 @@ function ppmCartData_keyup(product_id){
 function getDocSampleData(){	
 	var sampleProductList=localStorage.productSampleStr.split('<rd>');
 	var sampleProductLength=sampleProductList.length;
-	alert (localStorage.productSampleStr);
+	//alert (localStorage.productSampleStr);
 	var sample_show_1='<ul  data-role="listview">';
 	for (var j=0; j < sampleProductLength; j++){
 			if (sampleProductList[j] != ''){
-				alert (sampleProductList[j]);
+				//alert (sampleProductList[j]);
 				var sampleProductsingle=sampleProductList[j];
 				var sampleProductsingleList=sampleProductsingle.split('<fd>');
 	
