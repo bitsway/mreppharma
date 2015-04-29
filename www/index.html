@@ -325,7 +325,7 @@
                 
                 
                 <br/>
-				<a data-role="button" href="#page_confirm" data-icon="arrow-r" data-iconpos="right" >Next</a>
+				<a data-role="button" href="#page_confirm" onClick="set_confirm_page()" data-icon="arrow-r" data-iconpos="right" >Next</a>
                 
                 <br/><br/><br/><br/><br/><br/>
                 <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-delete" onClick="cancelVisitPage();" >Cancel Voucher</button>
@@ -376,7 +376,8 @@
                     <li style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:medium" ><a data-role="button" class="ui-btn" style="text-align:center" onClick="getDoctorSample();" >Sample</a></li>
                    
 					<!--</br></br>-->
-                    <div id="doc_sample"></div>
+                    <div id="doc_sample" style="background-color:#FFFFFF"></div>
+                    
 					</br>
                 </ul>
 				
@@ -393,8 +394,8 @@
                 
                 <input type="text" name="doc_feedback"  maxlength="50"  id="doc_feedback" placeholder="Feedback/Note"  >
                 
-				<br/>
-				<a data-role="button" href="#page_confirm" data-icon="arrow-r" data-iconpos="right" >Next</a>
+				<br/><br/><br/><br/><br/><br/>
+				<a data-role="button" href="#page_confirm" onClick="set_confirm_page()" data-icon="arrow-r" data-iconpos="right" >Next</a>
                 
                 <br/><br/><br/><br/><br/><br/>
                 <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-delete" onClick="cancelVisitPage();" >Cancel</button>
@@ -1029,7 +1030,7 @@
 	<!-- ------------- Visit Confirm  page -------------------- -->
 	<div data-theme="c" data-role="page" id="page_confirm" >
 		<div data-theme="c" data-role="header" data-position="fixed" >
-			<!--<a data-role="button" href="#pageHome"  class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>-->
+			<a data-role="button" href="#pageHome"  class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>
 			<a data-role="button" data-rel="back"  data-iconpos="left" class="ui-btn-right" data-transition="slide"><img src="back.png"></a>
 			<h3>Confirm Visit</h3>
 	  </div>
@@ -1050,14 +1051,18 @@
 			<input type="hidden" name="lat" id="lat" >
 			<input type="hidden" name="long" id="long" ><!--readonly-->
             
-			<a data-role="button" onClick="getLocationInfo();" >Confirm Location</a>            
+			<a data-role="button" id="btn_location" onClick="getLocationInfo();" >Confirm Location</a>            
             
 			<div id="checkLocation" style="color:#066"></div>
             
 			<br/>
             <br/>
             
-			<a data-role="button" id="btn_visit_submit" onClick="visitSubmit();" >Submit</a>
+			<div id="visit_submit">
+            <a data-role="button" id="btn_visit_submit" onClick="visitSubmit();" >Submit</a>
+            </div>
+            
+            
 			<div align="center"><img id="wait_image_visit_submit" style="" width="50px;" src="loading.gif" alt=""></div>
             
             
