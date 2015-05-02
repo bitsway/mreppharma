@@ -300,10 +300,10 @@ function check_user() {
 	//Main
 
 	
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 //	var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
- var apipath_base_photo_dm='http://e2.businesssolutionapps.com/welcome/dmpath/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+// var apipath_base_photo_dm='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//$("#error_login").html(apipath_base_photo_dm);
 	
@@ -3933,7 +3933,7 @@ function giftCartData_keyup(product_id){
 		localStorage.productGiftStr=productGiftStr
 		
 		
-		getDocGiftData();
+		//getDocGiftData();
 		
 //		==================================
 	}
@@ -4180,7 +4180,7 @@ function ppmCartData_keyup(product_id){
 		}//else
 	
 		localStorage.productppmStr=productppmStr
-		getDocppmData();
+		//getDocppmData();
 		
 		
 	}
@@ -4450,7 +4450,7 @@ function sampleCartData_keyup(product_id){
 		
 		
 		
-		getDocSampleData();
+		//getDocSampleData();
 
 	}
 
@@ -4499,6 +4499,8 @@ function visitSubmit_doc(){
 		}
 	}
 	//----------------------- Sample check
+	//$("#errorChkVSubmit").html(sample_doc_Str);
+	//alert (sample_doc_Str.indexOf('undefined'));
 	if (sample_doc_Str.indexOf('undefined')!=-1){
 		sample_doc_Str=''
 	}else{
@@ -4517,6 +4519,7 @@ function visitSubmit_doc(){
 			}
 		}
 	}
+	//alert (sample_doc_Str);
 	//----------------------- Gift check
 	if (gift_doc_Str.indexOf('undefined')!=-1){
 		gift_doc_Str=''
@@ -4558,27 +4561,63 @@ function visitSubmit_doc(){
 		}
 	}
 	//-------------------------------
-	if (campaign_submit.indexOf('undefined')!=-1){
+	
+	
+	
+	
+	
+	//if (campaign_submit.indexOf('undefined')==-1){
+//		campaign_submit='';
+//		
+//	}
+//	if (gift_submit.indexOf('undefined')==-1){
+//		gift_submit='';
+//		
+//	}
+//	if (sample_submit.indexOf('undefined')==-1){
+//		sample_submit='';
+//		
+//	}
+//	if (ppm_submit.indexOf('undefined')==-1){
+//		ppm_submit='';
+//		
+//	}
+	//------------------------
+	campaign_submit=campaign_submit.replace('undefined','').replace(',.','');
+	gift_submit=gift_submit.replace('undefined','').replace(',.','');
+	sample_submit=sample_submit.replace('undefined','').replace(',.','');
+	notes=notes.replace('undefined','').replace(',.','');
+	ppm_submit=ppm_submit.replace('undefined','').replace(',.','');
+	
+	
+	
+	if (campaign_submit==','){
 		campaign_submit='';
 		
 	}
-	if (gift_submit.indexOf('undefined')!=-1){
+	if (gift_submit==','){
 		gift_submit='';
 		
 	}
-	if (sample_submit.indexOf('undefined')!=-1){
+	if (sample_submit==','){
 		sample_submit='';
 		
 	}
-	if (ppm_submit.indexOf('undefined')!=-1){
+	if (ppm_submit==','){
 		ppm_submit='';
 		
 	}
-	//------------------------
 	
 	
 	var msg=campaign_submit+'..'+gift_submit+'..'+sample_submit+'..'+notes+'..'+ppm_submit
+	//alert (campaign_submit)
+//	alert (gift_submit)
+//	alert (sample_submit)
+//	alert (ppm_submit)
 	
+	//msg1=msg.replace('undefined','');
+	//alert (msg1)
+	//$("#errorChkVSubmit").html(msg1);
 	//alert (msg);
 	var lscPhoto=$("#lscPhoto").val();
 	var lat=$("#lat").val();
@@ -4606,7 +4645,11 @@ function visitSubmit_doc(){
 					$("#wait_image_visit_submit").show();		
 					//alert (localStorage.productOrderStr);
 					var marketNameId=localStorage.visit_market_show.split('|');
-					var market_Id=marketNameId[1];					
+					var market_Id=marketNameId[1];		
+					
+					
+					//$("#errorChkVSubmit").html(msg1);
+					
 					// $("#errorChkVSubmit").html(localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+long+'&v_with='+v_with+'&route='+market_Id)
 					// ajax-------
 					//alert (localStorage.payment_mode);
