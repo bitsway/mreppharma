@@ -776,6 +776,8 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 													$.mobile.navigate(url);								
 													location.reload();
 													
+													//set_doc_all();
+													
 												}else{
 													$("#wait_image_login").hide();
 													$("#loginButton").show();
@@ -3409,7 +3411,10 @@ function marketRetailerNext_doc() {
 			$("#err_m_retailer_next").text("Retailer required");
 	}else{
 		$("#btn_unschedule_market_ret").hide();
-		$("#wait_image_unschedule_market_ret").show();		
+		$("#unscheduled_m_client_combo_id_lv").hide();
+		
+		//alert ('nn');
+		$("#wait_image_ret").show();		
 		
 		$(".visit_client").html(visit_client);
 		
@@ -3436,7 +3441,7 @@ function marketRetailerNext_doc() {
 		var	ppm_show_1=localStorage.ppm_show_1;
 		
 		
-		set_doc_all();
+		//set_doc_all();
 		
 
 //			===============================
@@ -3450,12 +3455,13 @@ function marketRetailerNext_doc() {
 		//--------
 		$("#wait_image_unschedule_market_ret").hide();		
 		
-		
-		
+		$("#unscheduled_m_client_combo_id_lv").show();
+		$("#wait_image_ret").hide();
 		
 
 		var url = "#page_visit_doc";
 		$.mobile.navigate(url);
+		
 		//location.reload();
 							
 			
@@ -5173,6 +5179,7 @@ $(document).ready(function(){
 	$("#wait_image_unschedule_market").hide();		
 	$("#btn_unschedule_market").show();
 	
+	$("#wait_image_ret").hide();	
 	$("#wait_image_unschedule_market_ret").hide();		
 	$("#btn_unschedule_market_ret").show();
 	
