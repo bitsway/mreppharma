@@ -8,7 +8,8 @@ function getLocationInfo() { //location
 	$("#visit_submit").hide();
 	$("#btn_location").hide();
 	
-	
+	$("#checkLocation").html(''); 
+	$("#checkLocationProfileUpdate").html('');
 	
 	navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
@@ -71,6 +72,8 @@ function set_confirm_page(){
 	$("#lat_p").val(0);
 	$("#long_p").val(0);
 	$("#checkLocation").html('');
+	
+	
 }
 
 
@@ -117,7 +120,7 @@ function cancelVisitPage(){
 	$(".visit_client").html('');
 	
 	
-	
+	set_doc_all();
 	
 	
 	var url = "#pageHome";
@@ -139,6 +142,10 @@ function set_doc_all(){
 	 $(".docSample").val('');
 	 $(".docGift").val('');
 	 $(".docPpm").val('');
+	 
+	 $('#doc_feedback').val('');
+	  
+	 
 	
 }
 //================= Clear authorization
@@ -247,16 +254,7 @@ function clear_autho(){
 		localStorage.market_doctor='';
 		
 		
-		//----------- empty brand data from local storage
-		var brandList = localStorage.brand_list_string.split('<rd>');
-		var brandListLength=brandList.length	
-		for (var i=0; i < brandListLength; i++){
-			var brandName = brandList[i]
-			if(brandName!=""){
-				var brandCharStr=brandName.replace(' ','').replace('-','').replace('.','');
-				localStorage[brandCharStr]='';	
-			}																					
-		}
+
 		
 		var url = "#login";
 		$.mobile.navigate(url);	
@@ -570,7 +568,7 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 														
 														var product_qty='';																		
 
-														product_tbl_order=product_tbl_order+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input class="orderProduct" onBlur="getOrderData_keyup(\''+product_id2+'\')" type="number" id="order_qty'+product_id2+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id2+'" value="'+product_id2+'" ><input type="hidden" id="order_price'+product_id2+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id2.toUpperCase()+'" value="'+product_name2.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ product_id2 +'" onClick="tr_item(\''+product_id2+'\')" >'+ product_name2.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>'
+														product_tbl_order=product_tbl_order+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input class="orderProduct" maxlength="4" onBlur="getOrderData_keyup(\''+product_id2+'\')" type="number" id="order_qty'+product_id2+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id2+'" value="'+product_id2+'" ><input type="hidden" id="order_price'+product_id2+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id2.toUpperCase()+'" value="'+product_name2.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ product_id2 +'" onClick="tr_item(\''+product_id2+'\')" >'+ product_name2.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>'
 														//------------ Doctor Campaign Item list
 														
 														
@@ -579,7 +577,7 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 															
 														//-------------Sample----------
 														
-														product_tbl_doc_sample=product_tbl_doc_sample+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="80px" style="text-align:center; padding-left:5px;"><input class="docSample" onBlur="getSampleData_keyup(\''+product_id2+'\')" type="number" id="sample_qty'+product_id2+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="sample_id'+product_id2+'" value="'+product_id2+'" ><input type="hidden" id="sample_price'+product_id2+'" value="'+product_price+'" ><input type="hidden" id="sample_name'+product_id2.toUpperCase()+'" value="'+product_name2.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+product_name2.toUpperCase()+'</td></tr>'+'</table>'+'</li>'
+														product_tbl_doc_sample=product_tbl_doc_sample+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="80px" style="text-align:center; padding-left:5px;"><input class="docSample" maxlength="4" onBlur="getSampleData_keyup(\''+product_id2+'\')" type="number" id="sample_qty'+product_id2+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="sample_id'+product_id2+'" value="'+product_id2+'" ><input type="hidden" id="sample_price'+product_id2+'" value="'+product_price+'" ><input type="hidden" id="sample_name'+product_id2.toUpperCase()+'" value="'+product_name2.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+product_name2.toUpperCase()+'</td></tr>'+'</table>'+'</li>'
 														
 														
 													
@@ -597,14 +595,9 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 													
 													$("#product_list_tbl").html(localStorage.product_tbl_str);
 													$("#doctor_campaign_list_tbl").html(localStorage.product_tbl_str_doc_campaign);
-													
-													//$('#doctor_campaign_list_tbl').empty();
-													//$('#doctor_campaign_list_tbl').append(localStorage.product_tbl_str_doc_campaign).trigger('create');
-													
+
 													
 													$("#doctor_sample_list_tbl").html(localStorage.product_tbl_str_doc_sample);
-													//$('#doctor_sample_list_tbl').empty();
-													//$('#doctor_sample_list_tbl').append(localStorage.product_tbl_str_doc_sample).trigger('create');
 
 													//------------ Gift Item list								
 	
@@ -628,7 +621,7 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 															
 															//------------ Doctor Gift Item list
 															
-															gift_tbl_doc=gift_tbl_doc+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="80px" style="text-align:center; padding-left:5px;">'+'<input type="hidden" id="gift_id'+gift_id+'" value="'+gift_id+'" ><input class="docGift" onBlur="getGiftData_keyup(\''+gift_id+'\')" type="number" id="gift_qty'+gift_id+'"  value="" placeholder="0" ><input type="hidden" id="doc_gift_name'+gift_id.toUpperCase()+'" value="'+gift_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ gift_name +'" onClick="tr_item_doc_campaign(\''+gift_id+'\')" >'+ gift_name.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>';
+															gift_tbl_doc=gift_tbl_doc+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="80px" style="text-align:center; padding-left:5px;">'+'<input type="hidden" id="gift_id'+gift_id+'" value="'+gift_id+'" ><input class="docGift" maxlength="4" onBlur="getGiftData_keyup(\''+gift_id+'\')" type="number" id="gift_qty'+gift_id+'"  value="" placeholder="0" ><input type="hidden" id="doc_gift_name'+gift_id.toUpperCase()+'" value="'+gift_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ gift_name +'" onClick="tr_item_doc_campaign(\''+gift_id+'\')" >'+ gift_name.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>';
 															
 															
 															
@@ -666,7 +659,7 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 															
 															//------------ Doctor ppm Item list
 															
-															ppm_tbl_doc=ppm_tbl_doc+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="80px" style="text-align:center; padding-left:5px;">'+'<input type="hidden" id="ppm_id'+ppm_id+'" value="'+ppm_id+'" ><input class="docPpm" onBlur="getppmData_keyup(\''+ppm_id+'\')" type="number" id="ppm_qty'+ppm_id+'"  value="" placeholder="0" ><input type="hidden" id="doc_ppm_name'+ppm_id.toUpperCase()+'" value="'+ppm_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ ppm_name +'" onClick="tr_item_doc_campaign(\''+ppm_id+'\')" >'+ ppm_name.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>';
+															ppm_tbl_doc=ppm_tbl_doc+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="80px" style="text-align:center; padding-left:5px;">'+'<input type="hidden" id="ppm_id'+ppm_id+'" value="'+ppm_id+'" ><input class="docPpm" maxlength="4" onBlur="getppmData_keyup(\''+ppm_id+'\')" type="number" id="ppm_qty'+ppm_id+'"  value="" placeholder="0" ><input type="hidden" id="doc_ppm_name'+ppm_id.toUpperCase()+'" value="'+ppm_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ ppm_name +'" onClick="tr_item_doc_campaign(\''+ppm_id+'\')" >'+ ppm_name.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>';
 															
 															
 															
@@ -824,233 +817,6 @@ function getOtherOutlet(){
 
 
 
-//------------------------------------------- Schedule Visit: Get retailers
-//function getSheduledRetailer(){	
-//	$("#schedule_client_combo_id").val('');
-//	
-//	var search_date=$("#sch_date").val();
-//	
-//	if (search_date=='' || search_date==undefined){		
-//		$("#err_retailer_date_next").text("Date Required");
-//	}else{
-//		var serch_date = new Date(search_date);	
-//		if (serch_date=='Invalid Date'){		
-//			$("#err_retailer_date_next").text("Invalid date");
-//		}else{
-//			$("#err_retailer_date_next").text("");
-//			$("#btn_schedule_date").hide();
-//			$("#wait_image_schedule_date").show();
-//	
-//			//alert(localStorage.base_url+'getScheduleClientList?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&sch_date='+search_date);
-//			//http://127.0.0.1:8000/lscmreporting/syncmobile/getScheduleClientList?cid=LSCRM&rep_id=1001&rep_pass=123&synccode=2568&sch_date=2014-9-14
-//			
-//			// ajax-------
-//			$.ajax({
-//				 type: 'POST',
-//				 url: localStorage.base_url+'getScheduleClientList?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&sch_date='+search_date,
-//				 success: function(result) {
-//						
-//						if (result==''){
-//							$("#err_retailer_date_next").html('Sorry Network not available');
-//							$("#btn_schedule_date").show();
-//							$("#wait_image_schedule_date").hide();
-//						}else{					
-//							var resultArray = result.split('<SYNCDATA>');			
-//							if (resultArray[0]=='FAILED'){						
-//								$("#err_retailer_date_next").html(resultArray[1]);								
-//								$("#btn_schedule_date").show();
-//								$("#wait_image_schedule_date").hide();
-//							
-//							}else if (resultArray[0]=='SUCCESS'){
-//														
-//								var client_string=resultArray[1];
-//																
-//								//----------------
-//								var clientList = client_string.split('<rd>');
-//								var clientListShowLength=clientList.length
-//								
-//								//var schedule_client_combo='<option value="0" >Select Retailer</option>'
-//								var schedule_client_combo=''			
-//								for (var i=0; i < clientListShowLength; i++){
-//									var clientValueArray = clientList[i].split('<fd>');
-//									var clientID=clientValueArray[0];
-//									var clientName=clientValueArray[1];
-//									if (clientID!=''){
-//										//schedule_client_combo+='<option value="'+clientName+'-'+clientID+'" >'+clientName+'-'+clientID+'</option>';
-//										schedule_client_combo+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="sheduledRetailerVisitNextLV(\''+clientName+'-'+clientID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+clientName+'-'+clientID+'</a></li>';
-//									}
-//								}
-//																
-//								var schedule_client_combo_ob=$('#schedule_client_combo_id_lv');
-//								schedule_client_combo_ob.empty();	
-//								schedule_client_combo_ob.append(schedule_client_combo);			
-//																
-//								//schedule_client_combo_ob[0].selectedIndex = 0;
-//								
-//								$(".s_date").html(search_date);
-//								
-//								
-//								//-----------------
-//								$("#err_retailer_date_next").text("");
-//								$("#btn_schedule_date").show();
-//								$("#wait_image_schedule_date").hide();
-//								
-//								//-----
-//								var url = "#page_scheduled_retailer";
-//								$.mobile.navigate(url);	
-//								
-//								//schedule_client_combo_ob.selectmenu("refresh");
-//								schedule_client_combo_ob.listview("refresh");
-//								
-//							}else{						
-//								$("#err_retailer_date_next").html('Network Timeout. Please try again.');
-//								$("#btn_schedule_date").show();
-//								$("#wait_image_schedule_date").hide();
-//								}
-//						}
-//					  },
-//				  error: function(result) {			  
-//					  $("#err_retailer_date_next").html('Network Timeout. Please try again.');		
-//					  $("#btn_schedule_date").show();
-//					  $("#wait_image_schedule_date").hide();	  
-//				  }
-//			 });//end ajax
-//		
-//		}
-//	}
-//}
-
-//------------------------------------------ Schedule Visit: Next button; merchandizing
-//function sheduledRetailerVisitNextLV(lvalue) {
-//	$("#schedule_client_combo_id").val(lvalue);
-//	sheduledRetailerVisitNext();	
-//	}
-//	
-//function sheduledRetailerVisitNext() {
-//	var search_date=$("#sch_date").val();
-//	var visit_client=$("#schedule_client_combo_id").val();
-//	
-//	var visit_type="Scheduled";
-//	var scheduled_date=search_date
-//	
-//	if(visit_client=='' || visit_client==0){
-//			$("#err_retailer_next").text("Retailer required");
-//		}else{
-//			$("#err_retailer_next").text("");
-//			$("#btn_schedule_ret").hide();
-//			$("#wait_image_schedule_ret").show();
-//			
-//			visitClientId=visit_client.split('-')[1]
-//			
-//			//alert(localStorage.base_url+'getClientInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId);
-//   			//http://127.0.0.1:8000/lscmreporting/syncmobile/getClientInfo?cid=LSCRM&rep_id=1001&rep_pass=123&synccode=2568&client_id=R100008
-//			
-//			// ajax-------
-//			$.ajax({
-//				 type: 'POST',
-//				 url: localStorage.base_url+'getClientInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId,
-//				 success: function(result) {
-//						
-//						//alert(result);
-//						if (result==''){
-//							$("#err_retailer_next").html('Sorry Network not available');
-//							$("#btn_schedule_ret").show();
-//							$("#wait_image_schedule_ret").hide();
-//			
-//						}else{					
-//							var resultArray = result.split('<SYNCDATA>');			
-//							if (resultArray[0]=='FAILED'){						
-//								$("#err_retailer_next").html(resultArray[1]);
-//								$("#btn_schedule_ret").show();
-//								$("#wait_image_schedule_ret").hide();
-//							}else if (resultArray[0]=='SUCCESS'){
-//								
-//								var visitMarketStr=resultArray[1];
-//								var merItemStr=resultArray[2];
-//								var lastMarketInfoStr=resultArray[3];
-//								
-//								//------------------------- Campaign
-//								localStorage.campaign_string=resultArray[4];
-//								localStorage.visit_camp_list_str=resultArray[5];
-//								
-//								var visit_distributor_nameid=resultArray[6];
-//														
-//								localStorage.visit_camp_submit_str=''
-//								
-//								//------
-//								localStorage.marchandizingStr=merItemStr
-//								localStorage.marchandizingInfoStr=''
-//								
-//								//----------- empty brand data from local storage
-//								var brandList = localStorage.brand_list_string.split('<rd>');
-//								var brandListLength=brandList.length	
-//								for (var i=0; i < brandListLength; i++){
-//									var brandName = brandList[i]
-//									
-//									if(brandName!=""){
-//										var brandCharStr=brandName.replace(' ','').replace('-','').replace('.','');
-//										localStorage[brandCharStr]='';	
-//									}																												
-//								}
-//								
-//								//-------------------	
-//								localStorage.marketInfoStr=lastMarketInfoStr
-//								localStorage.marketInfoSubmitStr=''
-//								
-//								var lastMarketInfoStrList = lastMarketInfoStr.split('<rd>');
-//								var lastMarketInfoStrListLength=lastMarketInfoStrList.length
-//								for (var i=0; i < lastMarketInfoStrListLength; i++){
-//									var brandNameStrDetails = lastMarketInfoStrList[i]
-//									
-//									if(brandNameStrDetails!=''){
-//										var brandNameStrDetailsList=brandNameStrDetails.split('<fd>');
-//										var brandNameCurrent=brandNameStrDetailsList[0]
-//										
-//										var brandCharStrCurrent=brandNameCurrent.replace(' ','').replace('-','').replace('.','');
-//										localStorage[brandCharStrCurrent]=brandNameStrDetails;										
-//									}
-//								}
-//								
-//								//---------------
-//								$(".market").html(visitMarketStr);
-//								$(".visit_distributor").html(visit_distributor_nameid);
-//								$(".visit_type").html(visit_type);								
-//								$(".s_date").html(scheduled_date);
-//								$(".visit_client").html(visit_client);
-//								
-//								localStorage.visit_client=visit_client
-//								localStorage.visit_type=visit_type
-//								localStorage.scheduled_date=scheduled_date
-//								localStorage.visitMarketStr=visitMarketStr
-//								localStorage.visit_distributor_nameid=visit_distributor_nameid
-//										
-//								localStorage.visit_page="YES"
-//								
-//								//------------------- 							
-//								$("#err_retailer_next").text("");
-//								$("#btn_schedule_ret").show();
-//								$("#wait_image_schedule_ret").hide();
-//			
-//								var url = "#page_visit";	
-//								$.mobile.navigate(url);
-//								
-//								//location.reload();
-//								
-//							}else{						
-//								$("#err_retailer_next").html('Network Timeout. Please try again.');	
-//								$("#btn_schedule_ret").show();
-//								$("#wait_image_schedule_ret").hide();						
-//								}
-//						}
-//					  },
-//				  error: function(result) {			  
-//					  $("#err_retailer_next").html('Network Timeout. Please try again.');
-//					  $("#btn_schedule_ret").show();
-//					  $("#wait_image_schedule_ret").hide();
-//				  }
-//			 });//end ajax			
-//		}	
-// }
 
 //------------------------------Unsheduled visit: market
 function addMarketList() {
@@ -1096,10 +862,6 @@ function marketNext() {
 			$("#btn_unschedule_market").hide();
 			$("#wait_image_unschedule_market").show();		
 			
-			
-			
-			
-			
 			//visitMarketStr
 			localStorage.visit_market_show=market_name
 			var market_Id=market_name.split('|')[1];
@@ -1108,9 +870,7 @@ function marketNext() {
 			var catType=$("#catCombo").val();
 			
 			//===========================Get market client list Start============================
-			
 			market_list=localStorage.market_client;
-			
 			if (market_list.indexOf(market_Id)==-1){
 					$("#err_market_next").text("Sorry Network not available");	
 					$("#wait_image_unschedule_market").hide();		
@@ -1164,10 +924,13 @@ function marketNext() {
 						 }
 					
 					
-					var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
+					//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
 		
 					
 					var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+					
+					
+					
 					unscheduled_m_client_combo_ob.empty()
 					unscheduled_m_client_combo_ob.append(unscheduled_m_client_list);
 													
@@ -1184,12 +947,13 @@ function marketNext() {
 					$("#btn_unschedule_market").show();
 					
 					//------- 
+					
+					
+					
+					
 					var url = "#page_market_ret";	
 					$.mobile.navigate(url);
-					
-					
 					unscheduled_m_client_combo_ob.listview("refresh");
-					
 				}
 			}//end else
 			//============================Get market client list end===============================
@@ -1282,7 +1046,7 @@ function marketNext_sup() {
 								
 								
 								
-								
+								//alert (unscheduled_m_client_list);
 								
 //								--------------------------
 
@@ -1300,12 +1064,11 @@ function marketNext_sup() {
 								$("#btn_unschedule_market").show();
 								
 								//------- 
+								unscheduled_m_client_combo_ob.listview("refresh");
 								var url = "#page_market_ret";	
 								$.mobile.navigate(url);
 								
-								//unscheduled_m_client_combo_ob.selectmenu("refresh");
-								unscheduled_m_client_combo_ob.listview("refresh");
-									
+																	
 								} //else if
 								
 								
@@ -1351,24 +1114,22 @@ function marketRetailerNext() {
 		}else{
 			$("#btn_unschedule_market_ret").hide();
 			$("#wait_image_unschedule_market_ret").show();		
-			
 			visitClientId_list=visit_client.split('|')
-			
-			
-			
 			var visitClientId=visit_client.replace(visitClientId_list[0]+"|","");
+			
+			var visitClientID=visit_client.split('|')[1];
+			
+			if (localStorage.visit_client !=visitClientID ){
+				cancel_cart();
 
+			}
+			
 			$(".visit_client").html(visit_client);
 				
-
-			
 			localStorage.visit_client_show=visit_client
 			localStorage.visit_client=visit_client.split('|')[1]
-
 			
 			localStorage.visit_page="YES"
-			
-			
 			
 			//--------
 			$("#err_m_retailer_next").text("");
@@ -1377,41 +1138,11 @@ function marketRetailerNext() {
 
 			var url = "#page_visit";
 			$.mobile.navigate(url);
-							
+								
+			
 		}
 }
 
-//------------------------------Visit: Market Info List Show
-function getMarketInfo() {
-	var brandList = localStorage.brand_list_string.split('<rd>');
-	var brandListLength=brandList.length
-	var market_brand_list=''
-	for (var i=0; i < brandListLength; i++){
-		var brandName = brandList[i]
-		
-		if(brandName!=''){
-			var brandCharStr=brandName.replace(' ','').replace('-','').replace('.','');
-			var marketInfoBrandStr=localStorage[brandCharStr];
-			
-			if (marketInfoBrandStr=='' || marketInfoBrandStr==undefined){
-				market_brand_list+='<li style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketInfo(\''+brandName+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+brandName+'</a></li>';
-			}else{
-				market_brand_list+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketInfo(\''+brandName+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+brandName+'</a></li>';
-				}
-			
-		}
-	}
-	
-	//----------------
-	var market_info_lv_ob=$('#market_info_lv');
-	market_info_lv_ob.empty()
-	market_info_lv_ob.append(market_brand_list);
-	
-	//-------	
-	var url = "#market_info";
-	$.mobile.navigate(url);
-	market_info_lv_ob.listview("refresh");
-}
 
 
 
@@ -1451,7 +1182,10 @@ function getOrder(){
 function getOrderData_keyup(product_id){
 	var pid=$("#order_id"+product_id).val();
 	var pname=$("#order_name"+product_id).val();
-	var pqty=$("#order_qty"+product_id).val();
+	var pqty=$("#order_qty"+product_id).val().replace('.','').substring(0,4);
+	$("#order_qty"+product_id).val(pqty);
+	
+	
 	var productOrderStr=localStorage.productOrderStr
 	var productOrderShowStr='';
 	if ((eval(pqty) < 1) || (pqty == false)){
@@ -1483,6 +1217,7 @@ function getOrderData_keyup(product_id){
 						product_index=productOrderStr.indexOf(product_id)
 						if (product_index==0){
 							productOrderStr=productOrderStr.replace(orderProductList[j]+'<rd>', "")
+							productOrderStr=productOrderStr.replace(orderProductList[j], "")
 						}
 						if (product_index > 0){
 							productOrderStr=productOrderStr.replace('<rd>'+orderProductList[j], "")
@@ -1577,6 +1312,11 @@ function visitSubmit(){
 	}	
 
 }
+function replace_special_char(){
+	chemist_feedback=chemist_feedback.replace(')','').replace('(','').replace('{','').replace('}','').replace('[','').replace(']','').replace('"','').replace("'","").replace("/'","").replace("\'","").replace('>','').replace('<','');
+	doc_feedback=doc_feedback.replace(')','').replace('(','').replace('{','').replace('}','').replace('[','').replace(']','').replace('"','').replace("'","").replace("/'","").replace("\'","").replace('>','').replace('<','');
+	
+}
 function lscVisitSubmit(){	
 	$("#errorChkVSubmit").text("");
 	//alert (localStorage.visit_client);
@@ -1628,12 +1368,12 @@ function lscVisitSubmit(){
 	var chemist_feedback=$("#chemist_feedback").val();
 	//Cleaar special char from feedback
 	
-	chemist_feedback=chemist_feedback.replace(',','')
-	chemist_feedback=chemist_feedback.replace('"','')
-	chemist_feedback=chemist_feedback.replace("'","")
+	//chemist_feedback=chemist_feedback.replace(',','')
+//	chemist_feedback=chemist_feedback.replace('"','')
+//	chemist_feedback=chemist_feedback.replace("'","")
 	
 	
-	
+	replace_special_char();
 	
 	//alert(photoRequired+','+lscPhoto);
 	localStorage.payment_mode=$("#payment_mode").val();
@@ -1700,21 +1440,7 @@ function lscVisitSubmit(){
 										$("#chemist_feedback").val('')
 										
 										
-										
-										
-										//----------- empty brand data from local storage
-										var brandList = localStorage.brand_list_string.split('<rd>');
-										var brandListLength=brandList.length	
-										for (var i=0; i < brandListLength; i++){
-											var brandName = brandList[i]
-											
-											if(brandName!=""){
-												var brandCharStr=brandName.replace(' ','').replace('-','').replace('.','');
-												localStorage[brandCharStr]='';	
-											}
-																														
-										}
-										
+
 										//-------------
 										// Clear localStorage
 											
@@ -1722,17 +1448,7 @@ function lscVisitSubmit(){
 											
 											cancel_cart();
 											
-											
-//											var productList=localStorage.productListStr.split('<rd>');
-//											var productLength=productList.length;
-//											for (var i=0; i < productLength; i++){
-//												var productArray2 = productList[i].split('<fd>');
-//												var product_id2=productArray2[0];	
-//												var product_name2=productArray2[1];
-//												$("#order_qty"+product_id2).val('');
-//												//alert (product_id2);
-//											}	
-										
+
 										//--------------------------------------------------------
 										$(".visit_client").html('');
 										
@@ -3001,6 +2717,8 @@ function cart_data() {
 		
 		$("#product_total_cart").html(localStorage.show_total);
 		$("#product_total_last").html(localStorage.show_total);
+		$("#order_total_show").html(localStorage.show_total);
+		
 	}
 	else{
 		
@@ -3020,7 +2738,9 @@ function cart_data() {
 function getCartData_keyup(product_id){
 	var pid=$("#order_id"+product_id).val();
 	var pname=$("#order_name"+product_id).val();
-	var pqty=$("#cart_qty"+product_id).val();
+	var pqty=$("#cart_qty"+product_id).val().replace('.','').substring(0,4);
+	$("#cart_qty"+product_id).val(pqty);
+	
 	
 	$("#order_qty"+product_id).val(pqty);
 	var productOrderStr=localStorage.productOrderStr
@@ -3167,7 +2887,13 @@ function payment_mode(){
 function cancel_cart() {
 	$(".orderProduct").val('');
 	
-
+	
+	$("#product_total_cart").html('');
+	$("#product_total_last").html('');
+	$("#order_total_show").html('');
+	$("#chemist_feedback").val('');
+	
+	
 	localStorage.productOrderStr='';
 	$("#product_list_tbl_cart").html("");
 	var url = "#page_visit";	
@@ -3595,7 +3321,10 @@ function getGiftData_keyup(product_id){
 	//alert (product_id);
 	var pid=$("#gift_id"+product_id).val();
 	var pname=$("#doc_gift_name"+product_id).val();
-	var pqty=$("#gift_qty"+product_id).val();
+	var pqty=$("#gift_qty"+product_id).val().replace('.','').substring(0,4);
+	
+	$("#gift_qty"+product_id).val(pqty);
+	
 	var productGiftStr=localStorage.productGiftStr
 	var productGiftShowStr='';
 	if ((eval(pqty) < 1) || (pqty == false)){
@@ -3840,7 +3569,10 @@ function getppmData_keyup(product_id){
 	//alert ('product_id');
 	var pid=$("#ppm_id"+product_id).val();
 	var pname=$("#doc_ppm_name"+product_id).val();
-	var pqty=$("#ppm_qty"+product_id).val();
+	var pqty=$("#ppm_qty"+product_id).val().replace('.','').substring(0,4);
+	$("#ppm_qty"+product_id).val(pqty)
+	
+	
 	var productppmStr=localStorage.productppmStr
 	var productppmShowStr='';
 	if ((eval(pqty) < 1) || (pqty == false)){
@@ -4138,7 +3870,9 @@ function getDoctorSample(){
 function getSampleData_keyup(product_id){
 	var pid=$("#sample_id"+product_id).val();
 	var pname=$("#sample_name"+product_id).val();
-	var pqty=$("#sample_qty"+product_id).val();
+	var pqty=$("#sample_qty"+product_id).val().replace('.','').substring(0,4);
+	$("#sample_qty"+product_id).val(pqty);
+	
 	
 	var productSampleStr=localStorage.productSampleStr
 	
@@ -4480,7 +4214,7 @@ function visitSubmit_doc(){
 		
 	}
 	
-	
+	replace_special_char();
 	var msg=campaign_submit+'..'+gift_submit+'..'+sample_submit+'..'+notes+'..'+ppm_submit
 	//alert (campaign_submit)
 //	alert (gift_submit)

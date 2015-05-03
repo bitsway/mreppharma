@@ -321,6 +321,8 @@
 				
 
                  <a data-role="button"  class="ui-btn" style="text-align:center; " onClick="getOrder();" ><img src="order.png"></a>
+                 <div id="order_total_show" style=" color:#009191; font-weight:bold"></div>
+              
 				
                 <input name="chemist_feedback" id="chemist_feedback" type="text" maxlength="100" placeholder="Note">
                 
@@ -817,9 +819,9 @@
            
             
 			<a data-role="button" onClick="getLocationInfo();" >Confirm Location</a>
-			<div id="checkLocationProfileUpdate" style="color:#066;"></div>
+			
 			<br/><br/>		
-            	
+            <div id="checkLocationProfileUpdate" style="color:#066;"></div>	
 			<a data-role="button" id="btn_profile_update" onClick="lscProfileSubmit();" >Submit</a>            
             <div align="center"><img id="wait_image_profile_update" style="" width="50px;" src="loading.gif" alt=""></div>
 				
@@ -847,37 +849,6 @@
 		<div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CCC;" align="center" ></div>
 	</div>
  
-<!--=====================market info Page==================-->
-		<div data-theme="c" data-role="page" id="market_info">
-            <div data-theme="c" data-role="header" data-position="fixed">
-			<!--<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="menu.png"></a>-->
-            <a data-role="button" data-rel="back"  data-iconpos="left" class="ui-btn-right"><img src="back.png"></a>
-                <h3>Market Info</h3>
-            </div>
-			
-            <div data-role="content">
-				<div id="myerror" style="color:#C00"></div>               
-                 <ul data-inset="true"  data-role="listview">
-					<li>
-						<div><b>Visit Type & Date:</b><span class="visit_type"></span>&nbsp;&nbsp;<span class="s_date"></span></div>						
-						<div><b>Market :</b><span class="market"></span></div>
-                        <div><b>Distributor :</b><span class="visit_distributor"></span></div>
-                        <div><b>Chemist :</b><span class="visit_client" style="font-weight:bold"></span></div>
-					</li>					
-				</ul>
-                
-                 <!-- List view-------------------->		
-                <ul id="market_info_lv" data-role="listview" data-inset="true">
-                </ul>                
-                <!-- List ---->
-                
-				<br/>				
-				<a data-role="button" onClick="setMarketInfo();" >Done</a>
-            </div><!--/cont-->
-			
-			<div data-theme="c" data-role="footer" data-position="fixed">			
-			</div>			
-		 </div><!--/page-->
 
        
  
@@ -1061,11 +1032,12 @@
             
 			<a data-role="button" id="btn_location" onClick="getLocationInfo();" >Confirm Location</a>            
             
-			<div id="checkLocation" style="color:#066"></div>
+			
             
 			<br/>
             <br/>
             
+            <div id="checkLocation" style="color:#066"></div>
 			<div id="visit_submit">
             <a data-role="button" id="btn_visit_submit" onClick="visitSubmit();" >Submit</a>
             </div>
