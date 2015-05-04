@@ -319,6 +319,7 @@ function check_user() {
 	
 	
 	var cid=$("#cid").val().toUpperCase();
+	cid=$.trim(cid);
 	
 
 	
@@ -333,6 +334,8 @@ function check_user() {
 	
 	var user_id=$("#user_id").val();
 	var user_pass=$("#user_pass").val();
+	
+	user_id=$.trim(user_id);
 	
 	var base_url='';
 	var photo_url='';
