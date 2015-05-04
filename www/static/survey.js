@@ -2,6 +2,10 @@
 
 var mobile_off_flag=0;
 
+
+function reload_function() {
+	location.reload();
+}
 //-------GET GEO LOCATION
 function getLocationInfo() { //location
 	$("#wait_image_visit_submit").show()
@@ -180,7 +184,10 @@ function set_doc_all(){
 	 
 	 
 	 
-	 
+	$("#btn_location_doc").show();
+	$("#visit_submit_doc").hide();	
+	$("#checkLocation_doc").html('');
+	$("#wait_image_visit_submit_doc").hide('');
 	 
 	 
 	  
@@ -1485,9 +1492,8 @@ function lscVisitSubmit(){
 										//-------------
 										// Clear localStorage
 											
-											localStorage.productOrderStr='';
-											
-											cancel_cart();
+										localStorage.productOrderStr='';
+										cancel_cart();
 											
 
 										//--------------------------------------------------------
@@ -1525,14 +1531,15 @@ function lscVisitSubmit(){
 										
 										
 										
-										$("#btn_location_doc").show();
-										$("#visit_submit_doc").hide();	
-										$("#checkLocation_doc").html('');
-										$("#wait_image_visit_submit_doc").hide('');
+										//$("#btn_location_doc").show();
+//										$("#visit_submit_doc").hide();	
+//										$("#checkLocation_doc").html('');
+//										$("#wait_image_visit_submit_doc").hide('');
 										
 										
 										var url = "#page_confirm_visit_success";	
 										$.mobile.navigate(url);
+										
 																				
 									}else{						
 										$("#errorChkVSubmit").html('Network Timeout. Please try again.');
@@ -4550,6 +4557,13 @@ function chemist_visit() {
 	$("#ret_cat").show();
 	$("#d_visit").html("Chemist");
 	$("#v_path").html('<font style="font-weight:bold; font-size:13px; color:#666">Visit > Market > Chemist</font>');
+	
+	
+	
+	$("#btn_location").show();
+	$("#visit_submit").hide();
+	$("#checkLocation").html('');
+	
 	
 	localStorage.doctor_flag=0;
 	localStorage.visit_page="NO";
