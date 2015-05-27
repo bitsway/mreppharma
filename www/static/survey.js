@@ -927,8 +927,11 @@ function marketNext() {
 					$("#wait_image_unschedule_market").hide();		
 					$("#btn_unschedule_market").show();
 			}else{					
-					var resultArray = market_list.split('</'+market_Id+'>');			
-					m_client_string=resultArray[0].replace('<'+market_Id+'>','');
+					var resultArray_0 = market_list.split('<'+market_Id+'>');	
+					var resultArray_1 = resultArray_0[1].split('</'+market_Id+'>');	
+					var m_client_string = resultArray_1[0];	
+					//var resultArray = market_list.split('</'+market_Id+'>');			
+//					m_client_string=resultArray[0].replace('<'+market_Id+'>','');
 														
 					if 	(m_client_string=='Retailer not available'){
 						$("#err_market_next").text("Retailer not available");	
