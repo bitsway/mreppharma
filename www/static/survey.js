@@ -23,9 +23,9 @@ function getLocationInfo() { //location
 	$("#btn_location_doc").hide();
 	
 	$("#checkLocation_doc").html('');
+	var options = { enableHighAccuracy: false};
 	
-	
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	navigator.geolocation.getCurrentPosition(onSuccess, onError , options);
 }
 
 // onSuccess Geolocationshom
@@ -71,14 +71,24 @@ function onSuccess(position) {
 	
 	
 	
-	$("#wait_image_visit_submit").hide();
-	$("#visit_submit").hide();
-	$("#btn_location").show();
+	//$("#wait_image_visit_submit").hide();
+//	$("#visit_submit").hide();
+//	$("#btn_location").show();
+//	
+//	$("#checkLocation_doc").html('Location not found');
+//	$("#wait_image_visit_submit_doc").hide();
+//	$("#visit_submit_doc").hide();
+//	$("#btn_location_doc").show();
 	
-	$("#checkLocation_doc").html('Location not found');
+	$("#wait_image_visit_submit").hide();
+	$("#visit_submit").show();
+	$("#btn_location").hide();
+	
+	$("#checkLocation_doc").html('Location Confirmed'); 
+
 	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").hide();
-	$("#btn_location_doc").show();
+	$("#visit_submit_doc").show();
+	$("#btn_location_doc").hide();
 	}
 
 
@@ -328,7 +338,7 @@ function check_user() {
 	//Main
 
 	
-//	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 //	var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba';
