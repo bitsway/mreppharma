@@ -71,24 +71,24 @@ function onSuccess(position) {
 	
 	
 	
-	//$("#wait_image_visit_submit").hide();
-//	$("#visit_submit").hide();
-//	$("#btn_location").show();
-//	
-//	$("#checkLocation_doc").html('Location not found');
-//	$("#wait_image_visit_submit_doc").hide();
-//	$("#visit_submit_doc").hide();
-//	$("#btn_location_doc").show();
-	
 	$("#wait_image_visit_submit").hide();
-	$("#visit_submit").show();
-	$("#btn_location").hide();
+	$("#visit_submit").hide();
+	$("#btn_location").show();
 	
-	$("#checkLocation_doc").html('Location Confirmed'); 
-
+	$("#checkLocation_doc").html('Location not found');
 	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").show();
-	$("#btn_location_doc").hide();
+	$("#visit_submit_doc").hide();
+	$("#btn_location_doc").show();
+	
+	//$("#wait_image_visit_submit").hide();
+//	$("#visit_submit").show();
+//	$("#btn_location").hide();
+//	
+//	$("#checkLocation_doc").html('Location Confirmed'); 
+//
+//	$("#wait_image_visit_submit_doc").hide();
+//	$("#visit_submit_doc").show();
+//	$("#btn_location_doc").hide();
 	}
 
 
