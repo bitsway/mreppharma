@@ -1991,6 +1991,7 @@ function cancel_cart() {
 	$("#btn_location").show();
 	$("#visit_submit").hide();
 	$("#checkLocation").html('');
+	$("#wait_image_visit_submit").hide();
 	
 	
 	
