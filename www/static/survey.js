@@ -1988,6 +1988,12 @@ function cancel_cart() {
 	$("#checkLocation").html(''); 
 	
 	
+	$("#btn_location").show();
+	$("#visit_submit").hide();
+	$("#checkLocation").html('');
+	
+	
+	
 	localStorage.productOrderStr='';
 	$("#product_list_tbl_cart").html("");
 	var url = "#page_visit";	
