@@ -528,7 +528,7 @@ function check_user() {
 							
 							$.ajax({
 									 type: 'POST',
-									 url: localStorage.base_url+'check_user_new?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,
+									 url: localStorage.base_url+'check_user?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,
 									 success: function(result) {
 											//alert ("nnnnnnn");
 											if (result==''){
