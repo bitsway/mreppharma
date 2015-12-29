@@ -1501,7 +1501,7 @@ function lscVisitSubmit(){
 		var diffDays_delivery = date2.getDate() - date1.getDate(); 
 		var diffDays_collection = date3.getDate() - date1.getDate(); 
 		if  ((diffDays_delivery < 0) || (diffDays_collection < 0)){
-			$("#errorChkVSubmit").html('Invalid collection and delivery date');
+			$("#errorChkVSubmit").html('Invalid collection date or delivery date');
 		}
 		else{
 		
