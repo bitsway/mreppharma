@@ -1492,7 +1492,7 @@ function lscVisitSubmit(){
 		var year = currentDate.getFullYear()
 		var today=  year + "/" + month + "/" + day
 		var delivery_date_check=delivery_date.replace('-','/')
-		var collection_date_check=delivery_date.replace('-','/')
+		var collection_date_check=collection_date.replace('-','/')
 		//alert (today)
 		//alert (delivery_date)
 		var date1 = new Date(today);
