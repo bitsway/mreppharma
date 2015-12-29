@@ -341,9 +341,9 @@ function check_user() {
 	//Main
 
 	
-//	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+//	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
-//	var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba';
 	
 	
@@ -523,7 +523,7 @@ function check_user() {
 							localStorage.user_pass=user_pass;   		
 							localStorage.synced='NO'
 							
-							//$("#error_login").html(localStorage.base_url+'check_user_new?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+							//$("#error_login").html(localStorage.base_url+'check_user?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 							//http://127.0.0.1:8000/lscmreporting/syncmobile/check_user?cid=LSCRM&rep_id=1001&rep_pass=123&synccode=
 							
 							$.ajax({
@@ -1471,143 +1471,181 @@ function lscVisitSubmit(){
 	
 	//alert (chemist_feedback);
 	chemist_feedback=replace_special_char(chemist_feedback);
+	
+	var delivery_date=$("#delivery_date").val();
+	var collection_date=$("#collection_date").val();
+	
 
 	localStorage.payment_mode=$("#payment_mode").val();
-	if (photoRequired=='Yes' && lscPhoto==''){
-		$("#errorChkVSubmit").html('Picture required, Because of Bad marchandizing');
-	}else{
-		var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
+	
+	if  ((delivery_date.length < 10) || (collection_date.length < 10)){
 		
-		
-		if (lat=='' || lat==0 || longitude=='' || longitude==0){
-			$("#errorChkVSubmit").html('Location not Confirmed');	
-			$("#btn_location").show();	
-			$("#visit_submit").hide();	
-		}else{
-			
-			if (visitClientId=='' || visitClientId==undefined){
-				$("#errorChkVSubmit").html('Invalid Client');		
-			}else{
-				if(visit_type=='' || visit_type==undefined){
-					$("#errorChkVSubmit").html('Invalid Visit Type');
-				}else{
-					$("#visit_submit").hide();
-					$("#wait_image_visit_submit").show();		
-					//alert (localStorage.productOrderStr);
-					//$("#errorChkVSubmit").html(localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+long+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback)
-					// ajax-------
-					//alert (localStorage.payment_mode);
-					$.ajax({
-						 type: 'POST',
-						 url: localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback,
-						 success: function(result) {
-								
-								//alert(result);
-								if (result==''){					
-									$("#errorChkVSubmit").html('Sorry Network not available');
-									$("#wait_image_visit_submit").hide();
-									$("#visit_submit").show();									
-								}else{					
-									var resultArray = result.split('<SYNCDATA>');			
-									if (resultArray[0]=='FAILED'){						
-										$("#errorChkVSubmit").html(resultArray[1]);
-										$("#wait_image_visit_submit").hide();
-										$("#visit_submit").show();	
-									}else if (resultArray[0]=='SUCCESS'){
-										
-										//-----------
-										localStorage.visit_client=''
-										localStorage.marchandizingStr=''
-										
-										localStorage.marketInfoLSCStr=''
-										
-										localStorage.marketInfoStr='';
-										localStorage.marketInfoSubmitStr='';
-										
-										localStorage.productOrderStr='';
-										localStorage.marchandizingInfoStr='';
-										localStorage.visit_camp_list_str='';
-										localStorage.visit_camp_submit_str='';
-										visitCampaginTempArray=[];
-										visitCampaginArray=[];
-										
-										localStorage.visit_page="";
-										
-										localStorage.show_total="";
-										
-										$("#chemist_feedback").val('')
-										
-										
-
-										//-------------
-										// Clear localStorage
-											
-										localStorage.productOrderStr='';
-										cancel_cart();
-											
-
-										//--------------------------------------------------------
-										$(".visit_client").html('');
-										
-										$("#errorChkVSubmit").html('');
-										$("#lat").val('');
-										$("#longitude").val('');
-										$("#lscPhoto").val('');
-										document.getElementById('myImage').src = '';
-										
-										$("#lat_p").val('');
-										$("#long_p").val('');								
-										
-										$("#checkLocation").html('');
-										$("#checkLocationProfileUpdate").html('');
-										
-										$("#wait_image_visit_submit").hide();
-										$("#visit_submit").show();
-										
-										$("#product_total_last").html('');
-										$("#product_list_tbl_cart").html('');
-										$("#product_total_cart").html('');
-										$("#item_combo_id").val('Search');
-										
-										
-										
-										//--
-										$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
-										
-										
-										$("#btn_location").show();	
-										$("#visit_submit").hide();
-										$("#checkLocation").hide('');	
-										
-										
-										
-										//$("#btn_location_doc").show();
-//										$("#visit_submit_doc").hide();	
-//										$("#checkLocation_doc").html('');
-//										$("#wait_image_visit_submit_doc").hide('');
-										
-										
-										url = "#page_confirm_visit_success";	
-										$.mobile.navigate(url);
-										
-																				
-									}else{						
-										$("#errorChkVSubmit").html('Network Timeout. Please try again.');
-										$("#wait_image_visit_submit").hide();
-										$("#visit_submit").show();								
-										}
-								}
-							  },
-						  error: function(result) {			  
-								$("#errorChkVSubmit").html('Network Timeout. Please try again.');
-								$("#wait_image_visit_submit").hide();
-								$("#visit_submit").show();	
-						  }
-					 });//end ajax	
-				}
-			}
-		  }//locaction check
+		//alert(diffDays)
+		//var diffDays_delivery = delivery_date_check.getDate() - today.getDate();
+//		alert (diffDays_delivery)
+		$("#errorChkVSubmit").html('Please enter collection and delivery date');
 	}
+	else{
+		var currentDate = new Date()
+		var day = currentDate.getDate()
+		var month = currentDate.getMonth() + 1
+		var year = currentDate.getFullYear()
+		var today=  year + "/" + month + "/" + day
+		var delivery_date_check=delivery_date.replace('-','/')
+		var collection_date_check=delivery_date.replace('-','/')
+		//alert (today)
+		//alert (delivery_date)
+		var date1 = new Date(today);
+		var date2 = new Date(delivery_date_check);
+		var date3 = new Date(collection_date_check);
+		var diffDays_delivery = date2.getDate() - date1.getDate(); 
+		var diffDays_collection = date3.getDate() - date1.getDate(); 
+		if  ((diffDays_delivery < 0) || (diffDays_collection < 0)){
+			$("#errorChkVSubmit").html('Invalid collection and delivery date');
+		}
+		else{
+		
+					if (photoRequired=='Yes' && lscPhoto==''){
+						$("#errorChkVSubmit").html('Picture required, Because of Bad marchandizing');
+					}else{
+						var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
+						
+						
+						if (lat=='' || lat==0 || longitude=='' || longitude==0){
+							$("#errorChkVSubmit").html('Location not Confirmed');	
+							$("#btn_location").show();	
+							$("#visit_submit").hide();	
+						}else{
+							
+							if (visitClientId=='' || visitClientId==undefined){
+								$("#errorChkVSubmit").html('Invalid Client');		
+							}else{
+								if(visit_type=='' || visit_type==undefined){
+									$("#errorChkVSubmit").html('Invalid Visit Type');
+								}else{
+									$("#visit_submit").hide();
+									$("#wait_image_visit_submit").show();		
+								//	alert (localStorage.productOrderStr);
+								//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1')
+									// ajax-------
+									//alert (localStorage.payment_mode);
+									$.ajax({
+										 type: 'POST',
+										 url: localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1',
+										 success: function(result) {
+												
+												//alert(result);
+												if (result==''){					
+													$("#errorChkVSubmit").html('Sorry Network not available');
+													$("#wait_image_visit_submit").hide();
+													$("#visit_submit").show();									
+												}else{					
+													var resultArray = result.split('<SYNCDATA>');			
+													if (resultArray[0]=='FAILED'){						
+														$("#errorChkVSubmit").html(resultArray[1]);
+														$("#wait_image_visit_submit").hide();
+														$("#visit_submit").show();	
+													}else if (resultArray[0]=='SUCCESS'){
+														
+														//-----------
+														localStorage.visit_client=''
+														localStorage.marchandizingStr=''
+														
+														localStorage.marketInfoLSCStr=''
+														
+														localStorage.marketInfoStr='';
+														localStorage.marketInfoSubmitStr='';
+														
+														localStorage.productOrderStr='';
+														localStorage.marchandizingInfoStr='';
+														localStorage.visit_camp_list_str='';
+														localStorage.visit_camp_submit_str='';
+														visitCampaginTempArray=[];
+														visitCampaginArray=[];
+														
+														localStorage.visit_page="";
+														
+														localStorage.show_total="";
+														
+														$("#chemist_feedback").val('')
+														
+														
+				
+														//-------------
+														// Clear localStorage
+															
+														localStorage.productOrderStr='';
+														cancel_cart();
+															
+				
+														//--------------------------------------------------------
+														$(".visit_client").html('');
+														
+														$("#errorChkVSubmit").html('');
+														$("#lat").val('');
+														$("#longitude").val('');
+														$("#lscPhoto").val('');
+														document.getElementById('myImage').src = '';
+														
+														$("#lat_p").val('');
+														$("#long_p").val('');								
+														
+														$("#checkLocation").html('');
+														$("#checkLocationProfileUpdate").html('');
+														
+														$("#wait_image_visit_submit").hide();
+														$("#visit_submit").show();
+														
+														$("#product_total_last").html('');
+														$("#product_list_tbl_cart").html('');
+														$("#product_total_cart").html('');
+														$("#item_combo_id").val('Search');
+														
+														
+														
+														//--
+														$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
+														
+														
+														$("#btn_location").show();	
+														$("#visit_submit").hide();
+														$("#checkLocation").hide('');	
+														
+														$("#delivery_date").val('');
+														$("#collection_date").val('');
+														
+														//$("#btn_location_doc").show();
+				//										$("#visit_submit_doc").hide();	
+				//										$("#checkLocation_doc").html('');
+				//										$("#wait_image_visit_submit_doc").hide('');
+														
+														
+														url = "#page_confirm_visit_success";	
+														$.mobile.navigate(url);
+														
+																								
+													}else{						
+														$("#errorChkVSubmit").html('Network Timeout. Please try again.');
+														$("#wait_image_visit_submit").hide();
+														$("#visit_submit").show();								
+														}
+												}
+											  },
+										  error: function(result) {			  
+												$("#errorChkVSubmit").html('Network Timeout. Please try again.');
+												$("#wait_image_visit_submit").hide();
+												$("#visit_submit").show();	
+										  }
+									 });//end ajax	
+								}
+							}
+						  }//locaction check
+					}
+		}//end collection and delivery date future
+	
+	}//end collection and delivery date check
+	
+	
   }
 
 
