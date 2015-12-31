@@ -343,8 +343,8 @@ function check_user() {
 	
 	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
-var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test_bak/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
- // var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba';
+//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test_bak/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+  var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba';
 	
 	
 	var user_id=$("#user_id").val();
@@ -1495,7 +1495,7 @@ function lscVisitSubmit(){
 		var collection_date_check=collection_date.replace('-','/')
 		var delivery_year=delivery_date.split('-')[0]
 		var collection_year=collection_date.split('-')[0]
-		alert (delivery_year)
+		//alert (delivery_year)
 		//alert (delivery_date)
 		var date1 = new Date(today);
 		var date2 = new Date(delivery_date_check);
@@ -1538,15 +1538,15 @@ function lscVisitSubmit(){
 									$("#visit_submit").hide();
 									$("#wait_image_visit_submit").show();		
 								//	alert (localStorage.productOrderStr);
-									$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1')
+								//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1')
 									// ajax-------
 									//alert (localStorage.payment_mode);
 									$.ajax({
 										 type: 'POST',
 										 url: localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1',
 										 success: function(result) {
-												alert (collection_date)
-												alert (delivery_date)
+												//alert (collection_date)
+												//alert (delivery_date)
 												//alert(result);
 												if (result==''){					
 													$("#errorChkVSubmit").html('Sorry Network not available');
