@@ -1545,8 +1545,8 @@ function lscVisitSubmit(){
 										 type: 'POST',
 										 url: localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1',
 										 success: function(result) {
-												//alert (collection_date)
-												//alert (delivery_date)
+												alert (collection_date)
+												alert (delivery_date)
 												//alert(result);
 												if (result==''){					
 													$("#errorChkVSubmit").html('Sorry Network not available');
