@@ -1493,13 +1493,23 @@ function lscVisitSubmit(){
 		var today=  year + "/" + month + "/" + day
 		var delivery_date_check=delivery_date.replace('-','/')
 		var collection_date_check=collection_date.replace('-','/')
-		//alert (today)
+		var delivery_year=delivery_date.split('-')[0]
+		var collection_year=collection_date.split('-')[0]
+		//alert (delivery_year)
 		//alert (delivery_date)
 		var date1 = new Date(today);
 		var date2 = new Date(delivery_date_check);
 		var date3 = new Date(collection_date_check);
 		var diffDays_delivery = date2.getDate() - date1.getDate(); 
 		var diffDays_collection = date3.getDate() - date1.getDate(); 
+		//alert (delivery_year)
+		if (delivery_year > year){
+			diffDays_delivery=diffDays_delivery * (-1)
+		}
+		if (collection_year > year){
+			diffDays_collection=diffDays_collection * (-1)
+		} 
+		
 		if  ((diffDays_delivery < 0) || (diffDays_collection < 0)){
 			$("#errorChkVSubmit").html('Invalid collection date or delivery date');
 		}
