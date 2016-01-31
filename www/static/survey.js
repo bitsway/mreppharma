@@ -1511,9 +1511,9 @@ function lscVisitSubmit(){
 		if (collection_year > year){
 			diffDays_collection=diffDays_collection * (-1)
 		}
-		alert (diffDays_delivery)
+		//alert (diffDays_delivery)
 		//alert (date3)
-		alert (diffDays_collection)
+		//alert (diffDays_collection)
 		if  ((diffDays_delivery < 0 ) || (diffDays_collection < 0 )){
 			$("#errorChkVSubmit").html('Invalid collection and delivery date');
 		}
@@ -1539,7 +1539,7 @@ function lscVisitSubmit(){
 									$("#visit_submit").hide();
 									$("#wait_image_visit_submit").show();		
 								//	alert (localStorage.productOrderStr);
-									$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1')
+								//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&version=p1')
 									// ajax-------
 									//alert (localStorage.payment_mode);
 									$.ajax({
