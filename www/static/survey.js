@@ -1509,14 +1509,13 @@ function lscVisitSubmit(){
 		if (collection_year > year){
 			diffDays_collection=diffDays_collection * (-1)
 		}
-		//alert (diffDays_collection)
+		alert (diffDays_delivery)
 		//alert (date3)
-		//alert (diffDays_collection)
+		alert (diffDays_collection)
 		if  ((diffDays_delivery < 0 ) || (diffDays_collection < 0 )){
 			$("#errorChkVSubmit").html('Invalid collection and delivery date');
 		}
 		else{
-		
 					if (photoRequired=='Yes' && lscPhoto==''){
 						$("#errorChkVSubmit").html('Picture required, Because of Bad marchandizing');
 					}else{
