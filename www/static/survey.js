@@ -1500,8 +1500,10 @@ function lscVisitSubmit(){
 		var date1 = new Date(today);
 		var date2 = new Date(delivery_date_check);
 		var date3 = new Date(collection_date_check);
-		var diffDays_delivery =  date1.getDate() - date2.getDate(); 
-		var diffDays_collection = date1.getDate() - date3.getDate() ; 
+		//var diffDays_delivery = date2.getDate() - date1.getDate(); 
+//		var diffDays_collection = date3.getDate() - date1.getDate(); 
+		var diffDays_delivery = date2- date1; 
+		var diffDays_collection = date3 - date1; 
 		//alert (delivery_year)
 		if (delivery_year > year){
 			diffDays_delivery=diffDays_delivery * (-1)
