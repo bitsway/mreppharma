@@ -635,15 +635,24 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 														}
 													
 													
-													var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id" data-inset="true" data-filter-reveal="true" > ';
+													//var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id" data-inset="true" data-filter-reveal="true" > ';
+//													
+//													
+//													
+//													var product_tbl_doc_sample='<ul id="sample_combo_id_lv" data-role="listview"  data-filter="true" data-input="#sample_combo_id" data-inset="true" data-filter-reveal="true" > ';
+//													
+//													
+//													
+//													var product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" data-inset="true" data-filter-reveal="true">'
+													var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id"  > ';
 													
 													
 													
-													var product_tbl_doc_sample='<ul id="sample_combo_id_lv" data-role="listview"  data-filter="true" data-input="#sample_combo_id" data-inset="true" data-filter-reveal="true" > ';
+													var product_tbl_doc_sample='<ul id="sample_combo_id_lv" data-role="listview"  data-filter="true" data-input="#sample_combo_id"  > ';
 													
 													
 													
-													var product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" data-inset="true" data-filter-reveal="true">'
+													var product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" >'
 													
 													for (j=0; j < productLength; j++){
 														var productArray2 = productList[j].split('<fd>');
@@ -684,6 +693,15 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 
 													
 													$("#doctor_sample_list_tbl").html(localStorage.product_tbl_str_doc_sample);
+													
+													
+													
+													$('#campaign_combo_id_lv').listview();
+													$('#sample_combo_id_lv').listview();
+													$('#item_combo_id_lv').listview();
+													
+													
+													
 
 													//------------ Gift Item list								
 	
@@ -4068,6 +4086,12 @@ $(document).ready(function(){
 	$("#doctor_sample_list_tbl").html(localStorage.product_tbl_str_doc_sample);
 	$("#doctor_gift_list_tbl").html(localStorage.gift_tbl_doc);
 	$("#doctor_ppm_list_tbl").html(localStorage.ppm_tbl_doc);
+	
+	
+	
+	$('#campaign_combo_id_lv').listview();
+	$('#sample_combo_id_lv').listview();
+	$('#item_combo_id_lv').listview();
 	
 	
 	//Set total 
